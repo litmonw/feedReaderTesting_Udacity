@@ -62,7 +62,7 @@ $(function () {
         let $body = $('body');
 
         it('default hidden', function () {
-            expect($body.hasClass('menu-hidden')).toBeTruthy();
+            expect($body.hasClass('menu-hidden')).toBe(true);
         })
 
         /* 
@@ -74,10 +74,10 @@ $(function () {
         it('switch menu status', function () {
             // 触发器，用于模拟点击效果，判断点击时菜单是否显示
             $menuIcon.trigger('click');
-            expect($body.hasClass('menu-hidden')).toBeFalsy();
+            expect($body.hasClass('menu-hidden')).toBe(false);
             // 再次使用触发器，判断再次点击的时候菜单是否隐藏的同时也将菜单恢复到了初识状态
             $menuIcon.trigger('click');
-            expect($body.hasClass('menu-hidden')).toBeTruthy();
+            expect($body.hasClass('menu-hidden')).toBe(true);
         });
     })
 
@@ -94,14 +94,11 @@ $(function () {
 
         // 在describe函数中每个Spec执行之前执行
         beforeEach(function (done) {
-            loadFeed(0, function () {
-                done();
-            });
+            loadFeed(0, done);
         });
 
-        it('loadFeed normal', function (done) {
+        it('loadFeed normal', function () {
             expect($('.feed .entry').length).toBeGreaterThanOrEqual(1);
-            done();
         });
 
     });
@@ -127,10 +124,9 @@ $(function () {
             });
         }, 20000); // 增加回调所允许的超时时长
 
-         it('load newFeed normal', function (done) {
+         it('load newFeed normal', function () {
              console.log($firstContent, $secondContent);
              expect($firstContent).not.toBe($secondContent);
-             done();
          });
     });
 
